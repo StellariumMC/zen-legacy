@@ -43,7 +43,14 @@ object SlayerStats : Feature("slayerstats", true) {
                 "slayerstatslines",
                 "",
                 ElementType.MultiCheckbox(
-                    options = listOf("Show Bosses Killed", "Show Bosses/hr", "Show Average kill time", "Show Average spawn time", "Show Total Session time", "Show XP/hr"),
+                    options = listOf(
+                        "Show Bosses Killed",
+                        "Show Bosses/hr",
+                        "Show Average kill time",
+                        "Show Average spawn time",
+                        "Show Total Session time",
+                        "Show XP/hr"
+                    ),
                     default = setOf(0, 1, 4, 5)
                 )
             ))
