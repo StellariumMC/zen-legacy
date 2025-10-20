@@ -124,6 +124,8 @@ class Zen {
 
     companion object {
         @JvmField val LOGGER = LogManager.getLogger("zen")
+        @JvmField val VERSION: String = net.minecraftforge.fml.common.Loader.instance()
+            .indexedModList["zen"]?.version ?: "1.0.0"
         private val pendingCallbacks = mutableListOf<Pair<String, (Any) -> Unit>>()
         private val pendingFeatures = mutableListOf<Feature>()
         private val areaFeatures = mutableListOf<Feature>()

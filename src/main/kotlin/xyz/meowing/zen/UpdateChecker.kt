@@ -30,9 +30,7 @@ import java.net.URI
 import java.util.concurrent.CompletableFuture
 
 object UpdateChecker {
-    private val current: String
-        get() = net.minecraftforge.fml.common.Loader.instance()
-            .indexedModList["zen"]?.version ?: "1.0.0"
+    val current: String get() = Zen.VERSION
     private const val modrinthProjectId = "stWFyj4m"
     const val githubRepository = "StellariumMC/zen"
     private var isMessageShown = false
