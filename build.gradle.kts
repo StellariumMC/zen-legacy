@@ -7,12 +7,21 @@ plugins {
     id("gg.essential.loom") version "0.10.0.+"
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("net.kyori.blossom") version "1.3.2"
 }
 
 val baseGroup = project.properties["mod.group"].toString()
 val mcVersion = project.properties["minecraft.version"].toString()
 val modId = project.properties["mod.id"].toString()
+val modName = project.properties["mod.name"].toString()
+val modVersion = project.properties["mod.version"].toString()
 val transformerFile = file("src/main/resources/accesstransformer.cfg")
+
+blossom {
+    replaceToken("@mod_id@", modId)
+    replaceToken("@mod_name@", modName)
+    replaceToken("@mod_version@", modVersion)
+}
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
@@ -78,7 +87,7 @@ dependencies {
     shadowImpl("gg.essential:universalcraft-1.8.9-forge:430")
     shadowImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2")
 
-    shadowImpl("xyz.meowing:vexel-1.8.9-forge:107") {
+    shadowImpl("xyz.meowing:vexel-1.8.9-forge:109") {
         exclude("org.lwjgl")
     }
     shadowImpl("com.squareup.okhttp3:okhttp-jvm:5.2.1")
@@ -118,12 +127,13 @@ tasks.processResources {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     compilerOptions {
         freeCompilerArgs.add("-Xlambdas=class")
+        languageVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
     }
 }
 
 tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
     archiveClassifier.set("")
-    archiveBaseName.set("zen-1.8.9-forge-${project.properties["mod.version"]}")
+    archiveBaseName.set("zen-1.8.9-forge-${modVersion}")
     from(tasks.shadowJar)
     input.set(tasks.shadowJar.get().archiveFile)
 }

@@ -135,11 +135,9 @@ class Zen {
         val features = mutableListOf<Feature>()
         val mc: Minecraft = Minecraft.getMinecraft()
         val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+        val modInfo = KnitModInfo("@mod_id@", "@mod_name@", "@mod_version@")
         var isInInventory = false
         var mayorData: ApiMayor? = null
-
-        // CHANGE THIS, I DIDNT KNOW HOW TO USE IT
-        var modInfo = KnitModInfo("zen", "Zen", "1.1.8")
 
         private fun executePending() {
             pendingCallbacks.forEach { (configKey, callback) ->
