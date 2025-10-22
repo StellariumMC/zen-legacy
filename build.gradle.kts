@@ -87,7 +87,7 @@ dependencies {
     shadowImpl("gg.essential:universalcraft-1.8.9-forge:430")
     shadowImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2")
 
-    shadowImpl("xyz.meowing:vexel-1.8.9-forge:109") {
+    shadowImpl("xyz.meowing:vexel-1.8.9-forge:110") {
         exclude("org.lwjgl")
     }
     shadowImpl("com.squareup.okhttp3:okhttp-jvm:5.2.1")
@@ -122,13 +122,6 @@ tasks.processResources {
     }
 
     rename("accesstransformer.cfg", "META-INF/${modId}_at.cfg")
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    compilerOptions {
-        freeCompilerArgs.add("-Xlambdas=class")
-        languageVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
-    }
 }
 
 tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar") {
