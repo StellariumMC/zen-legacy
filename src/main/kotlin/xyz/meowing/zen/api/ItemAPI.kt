@@ -2,6 +2,7 @@ package xyz.meowing.zen.api
 
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import xyz.meowing.zen.Zen
@@ -134,6 +135,7 @@ object ItemAPI {
         }
 
         scope.launch {
+            delay(5000)
             try {
                 LOGGER.info("Updating Skyblock Item Data..")
                 if (force) {
@@ -165,7 +167,7 @@ object ItemAPI {
 
         try {
             NetworkUtils.getJson(
-                url = "https://app.mrfast-developer.com/api/pricingData",
+                url = "https://zen.mrfast-developer.com/pricingData",
                 onSuccess = { json ->
                     if (json.entrySet().isEmpty()) {
                         LOGGER.warn("There was a problem loading SBT Prices..")
@@ -190,6 +192,35 @@ object ItemAPI {
                 },
                 onError = {
                     LOGGER.error("There was a problem loading SBT Prices.. ${it.message}")
+                    it.printStackTrace()
+                }
+            )
+            NetworkUtils.getJson(
+                url = "https://zen.mrfast-developer.com/liveAuctions",
+                onSuccess = { json ->
+                    if (json.entrySet().isEmpty()) {
+                        LOGGER.warn("There was a problem loading SBT Live Auctions..")
+                        return@getJson
+                    }
+
+                    LOGGER.info("Loaded ${json.entrySet().size} Live Auctions From Zen Item API")
+
+                    json.entrySet().forEach { entry ->
+                        val item = entry.value.asJsonObject
+                        val itemId = entry.key
+
+                        if (!liveAuctionData.has(itemId)) {
+                            liveAuctionData.add(itemId, item)
+                        } else {
+                            val itemJson = liveAuctionData[itemId].asJsonObject
+                            item.entrySet().forEach { (key, value) ->
+                                itemJson.add(key, value)
+                            }
+                        }
+                    }
+                },
+                onError = {
+                    LOGGER.error("There was a problem loading SBT Live Auctions.. ${it.message}")
                     it.printStackTrace()
                 }
             )

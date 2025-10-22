@@ -24,6 +24,7 @@ import net.minecraft.event.ClickEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import org.apache.logging.log4j.LogManager
+import xyz.meowing.knit.api.loader.KnitModInfo
 import xyz.meowing.vexel.Vexel
 
 @Mod(modid = "zen", name = "Zen", version = "1.8.9", useMetadata = true, clientSideOnly = true)
@@ -134,6 +135,7 @@ class Zen {
         val features = mutableListOf<Feature>()
         val mc: Minecraft = Minecraft.getMinecraft()
         val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+        val modInfo = KnitModInfo("@mod_id@", "@mod_name@", "@mod_version@")
         var isInInventory = false
         var mayorData: ApiMayor? = null
 

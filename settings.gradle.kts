@@ -8,6 +8,7 @@ pluginManagement {
         maven("https://maven.minecraftforge.net/")
         maven("https://repo.spongepowered.org/maven/")
         maven("https://repo.essential.gg/repository/maven-releases/")
+        maven("https://maven.teamresourceful.com/repository/maven-private/") // Blossom 1.3.2
     }
     resolutionStrategy {
         eachPlugin {

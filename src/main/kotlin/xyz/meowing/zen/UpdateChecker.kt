@@ -16,6 +16,7 @@ import gg.essential.elementa.dsl.pixels
 import gg.essential.elementa.dsl.plus
 import org.lwjgl.LWJGLUtil
 import xyz.meowing.zen.Zen.Companion.mc
+import xyz.meowing.zen.Zen.Companion.modInfo
 import xyz.meowing.zen.Zen.Companion.prefix
 import xyz.meowing.zen.config.ui.core.CustomFontProvider
 import xyz.meowing.zen.utils.ChatUtils
@@ -30,9 +31,9 @@ import java.net.URI
 import java.util.concurrent.CompletableFuture
 
 object UpdateChecker {
-    private const val current = "1.1.7"
     private const val modrinthProjectId = "stWFyj4m"
-    const val githubRepository = "StellariumMC/zen"
+    private const val githubRepository = "StellariumMC/zen"
+    private val current = modInfo.version
     private var isMessageShown = false
     private var latestVersion: String? = null
     private var githubUrl: String? = null
