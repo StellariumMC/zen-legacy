@@ -27,7 +27,6 @@ object BatDeathTitle : Feature("batdeadtitle",true,"catacombs") {
                 val packet = event.packet
 
                 if (packet.soundName != "mob.bat.death" && packet.soundName != "mob.bat.hurt") return@register
-                if (!isEnabled()) return@register
                 if (LocationUtils.subarea?.lowercase()?.contains("boss") == true) return@register
 
                 TitleUtils.showTitle("§cBat Dead!", null, 1000)
