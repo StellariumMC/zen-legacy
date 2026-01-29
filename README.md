@@ -1,3 +1,7 @@
+
+# MOD IS DISCONTINUED
+
+
 ![Title Logo](https://i.imgur.com/89LZy2p.png)
 <div align="center">
     <a href="https://github.com/kiwidotzip/zen/releases/latest" target="_blank">
